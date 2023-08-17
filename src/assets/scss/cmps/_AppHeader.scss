@@ -1,0 +1,26 @@
+.app-header {
+    color: $primary-text;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    & > * {
+        height: 65%;
+        border-radius:5em;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        text-decoration: none;
+        
+    }
+}
+
+main {
+    flex-grow: 1;
+    width: 100%;
+}
+
+> footer {
+    background-color: $clrTopAndbottom;
+    color: white;
+}

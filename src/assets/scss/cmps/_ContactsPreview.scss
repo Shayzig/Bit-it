@@ -1,0 +1,51 @@
+.contact-preview {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr 0.5fr;
+    overflow: hidden;
+    background-color: #223341;
+    border-radius: 12em;
+
+    .contact-avatar {
+        align-self: center;
+        grid-column: 1;
+        border-radius: 50%;
+        margin-block-start: 0.17em;
+    }
+
+    .info {
+        grid-column: 2;
+        align-self: center;
+
+        .contact-name {
+            font-family: ubunto-bold;
+            font-size: 1.7rem;
+        }
+        .contact-phone {
+            margin-block-start: 0.4em;
+            color: rgb(177, 177, 177);
+            font-family: ubunto-light;
+            font-size: 1.4rem;
+        }
+    }
+
+    .actions {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-evenly;
+        flex-basis: 25%;
+        padding: 10px;
+        transform: translateX(100%);
+        transition: transform 0.2s;
+        background-color: #1c2d38;
+        border-radius: 50%;
+        font-size: 1.2rem;
+        & > * {
+            cursor: pointer;
+        }
+    }
+
+    &:hover .actions {
+        transform: translateX(0);
+    }
+}

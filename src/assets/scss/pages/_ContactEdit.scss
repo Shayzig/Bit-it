@@ -1,0 +1,58 @@
+.contact-edit-container {
+    @include container;
+    & > * {
+        grid-row: 2;
+        grid-column: 2;
+    }
+
+    .actions {
+        grid-row: 1;
+        @include actions;
+
+        .remove-contact {
+            cursor: pointer;
+        }
+    }
+
+    .contact-edit {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        .avatar-contact {
+            height: 300px;
+        }
+
+        .contact-input {
+            display: flex;
+            gap: em(16px, 16px);
+            flex-direction: column;
+            align-items: center;
+
+            input {
+                width: em(400px, 16px);
+                height: 60px;
+                border-radius: 3em;
+                background-color: $shadow-btn;
+                border: none;
+                color: $primary-text;
+                padding-inline-start: 1.5em;
+                font-size: 0.9rem;
+            }
+            .save-btn {
+                width: 200px;
+                height: 50px;
+                border-radius: 3em;
+                background-color: $primary-text;
+                font-size: 1.1rem;
+                font-family: ubunto-medium;
+                margin-block-start: 0.5em;
+                transition: 0.2s;
+
+                &:hover {
+                    background-color: darken($primary-text, 5%);
+                }
+            }
+        }
+    }
+}

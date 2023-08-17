@@ -1,0 +1,19 @@
+.contact-filter {
+    display: flex;
+    gap: 2em;
+    padding: 2em 1em;
+
+    .filter {
+        height: 3.6em;
+        border-radius: 3.5em;
+        padding-inline-start: 1.3em;
+        width: 25em;
+        background-color: transparent;
+        border: 1px solid $primary-text;
+        color: rgb(255, 255, 255);
+    }
+
+    .filter::placeholder {
+        color: $primary-text;
+    }
+}

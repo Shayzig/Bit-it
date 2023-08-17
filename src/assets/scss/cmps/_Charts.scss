@@ -1,0 +1,10 @@
+.charts-container {
+    margin-block-start: 2em;
+    display: flex;
+    justify-content: center;
+    margin-inline-end: 16em;
+    gap: 5em;
+    svg{
+        width:950px;
+    }
+}

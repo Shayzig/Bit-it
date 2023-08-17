@@ -1,0 +1,29 @@
+// Externals
+
+// Setup
+@import "setup/variables";
+@import "setup/functions";
+@import "setup/mixins";
+
+// Basics
+@import "basics/typography";
+@import "basics/base";
+@import "basics/helpers";
+@import "basics/layout";
+@import "basics/modals";
+@import "basics/animations";
+
+// Pages
+@import "./pages/HomePage.scss";
+@import "./pages/ContactPage.scss";
+@import "./pages/ContactDetails.scss";
+@import "./pages/ContactEdit.scss";
+
+// Components
+@import "./cmps/AppHeader";
+@import "./cmps/Charts";
+@import "./cmps/ContactsFilter";
+@import "./cmps/ContactsList";
+@import "./cmps/ContactsPreview";
+@import "./cmps/User";
+
