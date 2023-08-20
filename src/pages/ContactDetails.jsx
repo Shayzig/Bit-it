@@ -5,6 +5,7 @@ import MoveList from '../cmps/MoveList'
 import { useSelector } from 'react-redux'
 import { loadContact } from '../store/actions/contact.actions'
 import { login, updateUser } from '../store/actions/user.actions'
+import logoImage from '../assets/imgs/contact.png';
 
 
 export default function ContactDetails() {
@@ -60,7 +61,7 @@ export default function ContactDetails() {
             </div>
             <section className='contact-details'>
                 <div className="avatar-container">
-                    <img className="avatar-contact" src="https://ibb.co/WWk2p9d" alt="" />
+                    <img className="avatar-contact" src={logoImage} alt="" />
                 </div>
                 <h2 className='contact-name'>{contact.name}</h2>
                 <h5>{contact.phone}</h5>
