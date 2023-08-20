@@ -1,5 +1,6 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
+import logoImage from '../assets/imgs/bit.png';
 
 export default function AppHeader() {
     return (
@@ -9,7 +10,7 @@ export default function AppHeader() {
                 <NavLink to="/login">Login</NavLink>
                 {/* <NavLink to="/about">About</NavLink> */}
                 <div className="logo-bg">
-                    <NavLink to="/"><img className='logo' src="src/assets/imgs/bit.png" alt="" /></NavLink>
+                    <NavLink to="/"><img className='logo' src={logoImage} alt="" /></NavLink>
                 </div>
                 <NavLink to="/contact">Contacts</NavLink>
                 <NavLink to="/chart">Charts</NavLink>

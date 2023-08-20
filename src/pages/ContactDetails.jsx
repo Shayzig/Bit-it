@@ -60,7 +60,7 @@ export default function ContactDetails() {
             </div>
             <section className='contact-details'>
                 <div className="avatar-container">
-                    <img className="avatar-contact" src="../../src/assets/imgs/contact.png" alt="" />
+                    <img className="avatar-contact" src="https://ibb.co/WWk2p9d" alt="" />
                 </div>
                 <h2 className='contact-name'>{contact.name}</h2>
                 <h5>{contact.phone}</h5>
