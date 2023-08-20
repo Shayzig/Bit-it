@@ -1,0 +1,82 @@
+.moves-container {
+    display: flex;
+    flex-direction: column;
+    margin-block-start: 0.5em;
+    width: max-content;
+    .moves-list {
+        margin-block-start: 0.5em;
+        display: flex;
+        flex-direction: column;
+        gap: 1em;
+        .move-preview {
+            display: grid;
+            grid-template-columns: 300px 250px 150px 1fr;
+            justify-items: start;
+            align-items: end;
+            gap: 0.2em;
+            background-color: $cmp-mark;
+            padding: 1em 2em;
+            border-bottom-right-radius: 4em;
+            border-top-right-radius: 4em;
+            & :first-child {
+                color: $primary-text;
+            }
+            .move-to {
+                font-size: 1.7em;
+            }
+
+            .amount{
+                align-self: end;
+                display: flex;
+                align-items: center;
+                font-family: ubunto;
+                font-size: 1em;
+                
+                .us-amount {
+                    font-family: ubunto;
+                    font-size: 1.4em;
+                }
+                span {
+                    font-size: 1.3em;
+                    margin-inline: 0.4em;
+                }
+                .bitcoin-amount {
+                    font-family: ubunto;
+                    font-size: 1.4em;
+                    color: rgb(113, 177, 17);
+                }
+            }
+            // .amount {
+            //     font-size: 1.4em;
+            //     color: grey;
+            //     font-family: ubunto-light;
+            //     justify-self: end;
+            //     display: flex;
+            //     align-self: end;
+            //     gap: 0.4em;
+            //     .bitcoin {
+            //         color: rgb(113, 177, 17);
+            //         display: flex;
+            //         align-items: end;
+
+            //         img {
+            //             height:100%;
+            //         }
+            //     }
+            // }
+            .move-at {
+                color: grey;
+                font-family: ubunto-light;
+            }
+        }
+    }
+    .title {
+        display: flex;
+        align-items: center;
+        gap: 0.5em;
+        margin-block-end: 0.7em;
+        h3 {
+            color: $primary-text;
+        }
+    }
+}

@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react'
-import { LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip } from 'recharts'
+import { LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts'
 
 import { bitcoinService } from '../services/bitcoin.service'
+import { useParams } from 'react-router-dom'
 
 export default function Charts() {
   const [marketPrice, setMarketPrice] = useState(null)
@@ -13,18 +14,14 @@ export default function Charts() {
   }, [])
 
   function formatTime(time) {
-    const monthNames = [
-      "January", "February", "March", "April", "May", "June",
-      "July", "August", "September", "October", "November", "December"
-    ]
-
     const newTime = new Date(time * 1000)
+    const day = newTime.getDate()
+    const month = newTime.getMonth() + 1
     const year = newTime.getFullYear()
-    const month = monthNames[newTime.getMonth()] // Get the month name from the array
-
-    return year + ' ' + month
+  
+    return `${day}.${month}.${year}`
   }
-
+  
   function formatToUSD(amount) {
     const formatter = new Intl.NumberFormat('en-US', {
       style: 'currency',
@@ -60,6 +57,7 @@ export default function Charts() {
   async function getConfirmedTransactions() {
     try {
       const res = await bitcoinService.getConfirmedTransactions()
+      console.log(res)
       setTradeVol(res)
     } catch (error) {
       console.log(error)
@@ -68,35 +66,51 @@ export default function Charts() {
 
   return (
     <div className="charts-container">
-      <LineChart width={800} height={600} data={formattedTradeData} margin={{ top: 5, right: 20, bottom: 5, left: 0 }}>
-        <Line type="monotone" dataKey="price" stroke="#aeff5a" />
-        <CartesianGrid stroke="#ffffff48" strokeDasharray="5 5" />
-        <XAxis
-          stroke="white"
-          dataKey="x" />
-        <YAxis
-          stroke="white"
-          tickFormatter={value => formatToUSD(value)}
-        />
-        <Tooltip
-          contentStyle={{ backgroundColor: 'rgba(0, 0, 0, 0.8)', border: '1px solid #ccc', color: "white" }}
-          formatter={(value) => formattedTradeData.find(item => item.price === value)?.formattedPrice} />
-      </LineChart>
+        {/* <h2>Exchange Trade Volume (USD)</h2> */}
+        <ResponsiveContainer width="100%" height="100%">
+          <LineChart width={800} height={600} data={formattedTradeData} margin={{ top: 0, right: 0, bottom: 0, left: 0 }}>
+            <Line type="monotone" dataKey="price" stroke="#aeff5a" />
+            <CartesianGrid stroke="#ffffff30" strokeDasharray="5 5" />
+            <XAxis
+              stroke="white"
+              dataKey="x"
+              angle={-45}
+              height={80}
+              textAnchor="end"
+            />
+            <YAxis
+              stroke="white"
+              width={135}
+              tickFormatter={value => formatToUSD(value)}
+            />
+            <Tooltip
+              contentStyle={{ backgroundColor: 'rgba(0, 0, 0, 0.8)', border: '1px solid #ccc', color: "white" }}
+              formatter={(value) => formattedTradeData.find(item => item.price === value)?.formattedPrice} />
+          </LineChart>
+        </ResponsiveContainer>
 
-      <LineChart width={800} height={600} data={formattedMarketData} margin={{ top: 5, right: 20, bottom: 5, left: 0 }}>
-        <Line type="monotone" dataKey="price" stroke="#aeff5a" />
-        <CartesianGrid stroke="#ffffff48" strokeDasharray="5 5" />
-        <XAxis
-          stroke="white"
-          dataKey="x" />
-        <YAxis
-          stroke="white"
-          tickFormatter={value => formatToUSD(value)}
-        />
-        <Tooltip
-          contentStyle={{ backgroundColor: 'rgba(0, 0, 0, 0.8)', border: '1px solid #ccc', color: "white" }}
-          formatter={(value) => formattedMarketData.find(item => item.price === value)?.formattedPrice} />
-      </LineChart>
+      {/* <div className="market-container">
+        <h2>Market</h2>
+        <LineChart width={800} height={600} data={formattedMarketData} margin={{ top: 0, right: 0, bottom: 0, left: 0 }}>
+          <Line type="monotone" dataKey="price" stroke="#aeff5a" />
+          <CartesianGrid stroke="#ffffff48" strokeDasharray="5 5" />
+          <XAxis
+            stroke="white"
+            dataKey="x"
+            angle={-45}
+            height={80}
+            textAnchor="end"
+          />
+          <YAxis
+            stroke="white"
+            width={78}
+            tickFormatter={value => formatToUSD(value)}
+          />
+          <Tooltip
+            contentStyle={{ backgroundColor: 'rgba(0, 0, 0, 0.8)', border: '1px solid #ccc', color: "white" }}
+            formatter={(value) => formattedMarketData.find(item => item.price === value)?.formattedPrice} />
+        </LineChart>
+      </div> */}
 
 
     </div>

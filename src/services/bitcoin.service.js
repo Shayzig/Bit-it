@@ -5,6 +5,7 @@ const TRADE_KEY = 'trade_db'
 
 export const bitcoinService = {
     getBitcoinRate,
+    getBitcoinRateG,
     getMarketPrice,
     getConfirmedTransactions
 }
@@ -12,6 +13,11 @@ export const bitcoinService = {
 
 async function getBitcoinRate(coins) {
     const url = `https://blockchain.info/tobtc?currency=USD&value=${coins}`
+    const { data } = await axios.get(url)
+    return data
+}
+async function getBitcoinRateG() {
+    const url = `https://blockchain.info/tobtc?currency=USD&value=1`
     const { data } = await axios.get(url)
     return data
 }
@@ -37,7 +43,7 @@ async function getConfirmedTransactions() {
         return Promise.resolve(marketTrade)
     }
 
-    const url = `https://api.blockchain.info/charts/transactions-per-second?timespan=5weeks&format=json&cors=true`
+    const url = `https://api.blockchain.info/charts/trade-volume?timespan=5months&format=json&cors=true`
     const res = await axios.get(url)
     marketTrade = res.data.values
     storageService.store(TRADE_KEY, marketTrade)

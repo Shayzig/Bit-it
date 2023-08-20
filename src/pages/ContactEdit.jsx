@@ -1,28 +1,22 @@
 import React, { useEffect, useState } from 'react'
 import { contactService } from '../services/contact.service'
-import { Link, useNavigate, useParams } from 'react-router-dom'
+import { Link, Navigate, useNavigate, useParams } from 'react-router-dom'
+import { loadContact, updateContact } from '../store/actions/contact.actions'
+import { useSelector } from 'react-redux'
 
 export default function ContactEdit() {
 
-    const [contact, setContact] = useState(contactService.getEmptyContact())
     const params = useParams()
     const navigate = useNavigate()
+    const contact = useSelector(state => state.contactModule.contact)
+    const [contactToEdit, setContactToEdit] = useState(null)
 
     useEffect(() => {
-        loadContact()
-    }, [])
-
-    async function loadContact() {
         const contactId = params.id
-        try {
-            if (contactId) {
-                const contact = await contactService.getContactById(contactId)
-                setContact(contact)
-            }
-        } catch (error) {
-            console.log('error:', error)
-        }
-    }
+        loadContact(contactId)
+        setContactToEdit(contact)
+    }, [contact])
+
 
     function handleChange({ target }) {
         const field = target.name
@@ -39,7 +33,7 @@ export default function ContactEdit() {
                 break;
         }
 
-        setContact(prevContact => ({
+        setContactToEdit(prevContact => ({
             ...prevContact,
             [field]: value
         }))
@@ -48,7 +42,7 @@ export default function ContactEdit() {
     async function onSaveContact(ev) {
         ev.preventDefault()
         try {
-            await contactService.saveContact(contact)
+            updateContact(contactToEdit)
             navigate('/contact')
         } catch (error) {
         }
@@ -63,8 +57,8 @@ export default function ContactEdit() {
 
         }
     }
-
-    const { name, phone } = contact
+if(!contactToEdit) return 
+    const { name, phone } = contactToEdit
     return (
         <section className='contact-edit-container full'>
 

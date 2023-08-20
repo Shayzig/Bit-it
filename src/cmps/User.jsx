@@ -1,47 +1,46 @@
 import React, { useEffect, useState } from 'react'
-import { contactService } from '../services/contact.service'
 import { bitcoinService } from '../services/bitcoin.service'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faBitcoinSign } from '@fortawesome/free-solid-svg-icons'
 
-export default function User() {
+export default function User({ loggedInUser }) {
 
-    const [user, setUser] = useState(null)
     const [bitcoinRate, setBitcoinRate] = useState(null)
 
     useEffect(() => {
-        getUser()
-    }, [])
+        if (loggedInUser) loadBitcoinRate()
+    }, [loggedInUser])
 
-    useEffect(() => {
-        if (user) loadBitcoinRate()
-    }, [user])
-
-    function getUser() {
-        const currUser = contactService.getUser()
-        setUser(currUser)
+    const formatToUSD = (amount) => {
+        return new Intl.NumberFormat('en-US', {
+            style: 'currency',
+            currency: 'USD',
+            minimumFractionDigits: 0,
+            maximumFractionDigits: 0,
+        }).format(amount)
     }
+
 
     async function loadBitcoinRate() {
         try {
-            const userBitcoinRate = await bitcoinService.getBitcoinRate(user.coins)
+            const userBitcoinRate = await bitcoinService.getBitcoinRate(loggedInUser.coins)
             setBitcoinRate(userBitcoinRate)
         } catch (error) {
-            console.log(error);
+            console.log(error)
         }
     }
 
-    if (!user) return
-
+    if (!loggedInUser) return
     return (
-        <section className="user-container full">
+        <section className="user-container">
             <div className="user">
-                <img className='avatar' src={user.img} alt="" />
-                <h2 className='name'>Hello, {user.name}</h2>
-                <h2 className='coins'>Current Coins</h2>
-                <div className="user-coins">{user.coins}</div>
-                <h2 className='btc'>Bitcoin rate</h2>
-                <div className="rate"> {bitcoinRate}</div>
+                <img className='avatar' src={loggedInUser.img} alt="" />
+                <h2 className='name'>Hello, {loggedInUser.name}</h2>
+                <h2 className='coins'>USD</h2>
+                <div className="user-coins">{formatToUSD(loggedInUser.coins)}</div>
+                <h2 className='btc'>BIT</h2>
+                <div className="rate"><FontAwesomeIcon icon={faBitcoinSign} style={{ color: "#71b20f", fontSize:"0.9em" }} /> {bitcoinRate}</div>
             </div>
-
         </section>
 
     )

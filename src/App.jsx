@@ -1,5 +1,3 @@
-// import './App.css'
-import { useState } from 'react'
 import './assets/scss/global.scss'
 import './assets/scss/basics/_typography.scss'
 import AppHeader from './cmps/AppHeader'
@@ -9,14 +7,38 @@ import ContactsPage from './pages/ContactPage'
 import About from './pages/About'
 import ContactEdit from './pages/ContactEdit'
 import ContactDetails from './pages/ContactDetails'
-import { Navigate, Route, HashRouter as Router, Routes } from 'react-router-dom'
+import LoginSignUp from './pages/LoginSignUp'
+import { useEffect } from 'react'
+import { Route, HashRouter as Router, Routes } from 'react-router-dom'
+import { useSelector } from 'react-redux'
+import { loadUsers } from './store/actions/user.actions'
+
 
 function App() {
 
-    const [selectedCmp, setSelectedCmp] = useState('home')
+    const users = useSelector(state => state.userModule.users)
+    useEffect(() => {
+        loadUsers()
+    }, [])
 
-    function setCmp(cmp) {
-        setSelectedCmp(cmp)
+    const Team = () => {
+        return (
+            <ul>
+                <li>Moshe</li>
+                <li>Dan</li>
+                <li>Lior</li>
+            </ul>
+        )
+    }
+
+    const Vision = () => {
+        return (
+            <ul>
+                <li>Take Over The World</li>
+                <li>Save The World</li>
+                <li>Eat</li>
+            </ul>
+        )
     }
 
     return (
@@ -25,11 +47,17 @@ function App() {
                 <AppHeader />
                 <Routes>
                     <Route path='/' element={<HomePage />} />
-                    <Route path='/about' element={<About />} />
+                    <Route path='/login' element={<LoginSignUp />} />
+
+                    <Route path='/about' element={<About />} >
+                        <Route path='team' element={<Team />} />
+                        <Route path='vision' element={<Vision />} />
+                    </Route >
+
                     <Route path='/contact' element={<ContactsPage />} />
                     <Route path='/chart' element={<Charts />} />
-                    <Route path='contact/edit/:id?' element={<ContactEdit />} />
-                    <Route path='contact/:id' element={<ContactDetails />} />
+                    <Route path='/contact/edit/:id?' element={<ContactEdit />} />
+                    <Route path='/contact/:id' element={<ContactDetails />} />
                 </Routes>
             </section>
         </Router>
@@ -38,3 +66,5 @@ function App() {
 }
 
 export default App
+
+

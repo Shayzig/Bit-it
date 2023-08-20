@@ -1,29 +1,56 @@
 
 import React, { useEffect, useState } from 'react'
-import { contactService } from '../services/contact.service'
 import { Link, useNavigate, useParams } from 'react-router-dom'
+import MoveList from '../cmps/MoveList'
+import { useSelector } from 'react-redux'
+import { loadContact } from '../store/actions/contact.actions'
+import { login, updateUser } from '../store/actions/user.actions'
 
-export default function ContactDetails({ contactId, onBack }) {
 
-    const [contact, setcontact] = useState(null)
+export default function ContactDetails() {
+
+    const contact = useSelector(state => state.contactModule.contact)
+    const loggedInUser = useSelector(state => state.userModule.loggedInUser)
+
+    const [coinsAmount, setCoinsAmount] = useState(0)
     const params = useParams()
-    const navigate = useNavigate()
 
 
     useEffect(() => {
-        loadcontact()
+        loadContact(params.id)
     }, [])
 
-    async function loadcontact() {
-        const contact = await contactService.getContactById(params.id)
-        setcontact(contact)
+    function handleChange({ target }) {
+        const field = target.name
+        let value = target.value
+
+        switch (target.type) {
+            case 'number':
+            case 'range':
+                value = (+value || '')
+                break
+            case 'checkbox':
+                value = target.checked
+            default:
+                break
+        }
+        setCoinsAmount(value)
     }
 
-    function onBack() {
-        navigate('/contact')
+    function onTransferFound() {
+        if (loggedInUser.coins < coinsAmount) return
+        const move = { to: contact.name, at: new Date().toLocaleString(), amount: coinsAmount };
+        const updatedUser = {
+            ...loggedInUser,
+            coins: loggedInUser.coins - coinsAmount,
+            moves: [...loggedInUser.moves, move]
+        };
+        updateUser(updatedUser)
+        login(updatedUser)
     }
 
-    if (!contact) return <div>Loading...</div>
+    if (!loggedInUser) return
+    const contactLastMoves = loggedInUser.moves.filter(move => move.to === contact.name)
     return (
         <section className='details-container full' >
 
@@ -35,15 +62,15 @@ export default function ContactDetails({ contactId, onBack }) {
                 <div className="avatar-container">
                     <img className="avatar-contact" src="../../src/assets/imgs/contact.png" alt="" />
                 </div>
-                {/* <img src={contact.imgUrl} alt="" /> */}
                 <h2 className='contact-name'>{contact.name}</h2>
                 <h5>{contact.phone}</h5>
                 <h6>{contact.email}</h6>
                 <div className="transfer-input">
-                    <input type="text" />
-                    <div className="transfer-btn">
+                    <input onChange={handleChange} type="number" name="amount" id="amount" placeholder='Enter coins' />
+                    <div className="transfer-btn" onClick={onTransferFound}>
                         <span className='transfer'> Transfer</span></div>
                 </div>
+                <MoveList contactLastMoves={contactLastMoves} />
             </section>
         </section>
 

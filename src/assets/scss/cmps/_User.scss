@@ -1,21 +1,20 @@
 .user-container {
     position: relative;
-    background-color: #141a22d4;
-    border: 8px solid #041301;
-    outline: 1px solid $border-neon;
-    box-shadow: 0 0 35px #8dce4c2f;
+    // background-color: #141a22d4;
+    // border: 8px solid #041301;
+    // outline: 1px solid $border-neon;
+    // box-shadow: 0 0 35px #8dce4c2f;
     width: max-content;
-    margin: auto;
+    // margin: auto;
     margin-block: 2em;
-    border-radius: 10em;
-    display: grid;
-    grid-template-columns: 150px 1fr 150px;
+    // border-radius: 10em;
+    // display: grid;
+    // grid-template-columns: 150px 1fr 150px;
     padding-block: 2em;
 
     .user {
         grid-column: 2;
         display: grid;
-        justify-self: center;
         grid-template-columns: repeat(2, 200px);
         grid-template-rows: repeat(3, auto);
         align-items: center;

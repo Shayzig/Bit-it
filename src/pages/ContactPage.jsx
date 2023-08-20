@@ -1,24 +1,16 @@
-import React, { useEffect, useState } from 'react'
-import { contactService } from '../services/contact.service'
+import React, { useEffect } from 'react'
 import ContactList from '../cmps/ContactList'
 import { ContactFilter } from '../cmps/ContactFilter'
-import ContactDetails from './ContactDetails'
+import { loadContacts, removeContact, setFilterBy } from '../store/actions/contact.actions'
+import { useSelector } from 'react-redux'
 
-export default function ContactPage({ onSelectContact }) {
-    const [contacts, setContacts] = useState(null)
-    const [selectedContact, setSelectedContact] = useState(null)
-    const [filterBy, setFilterBy] = useState({
-        name: '',
-        phone: '',
-    })
+export default function ContactPage() {
 
-    async function getContacts() {
-        const contacts = await contactService.getContacts(filterBy)
-        setContacts(contacts)
-    }
+    const contacts = useSelector(state => state.contactModule.contacts) // registed to change in the contacts state
+    const filterBy = useSelector(state => state.contactModule.filterBy)
 
     useEffect(() => {
-        getContacts()
+        loadContacts()
     }, [filterBy])
 
     function onChangeFilter(filterBy) {
@@ -27,25 +19,21 @@ export default function ContactPage({ onSelectContact }) {
 
     async function onRemoveContact(contactId) {
         try {
-            await contactService.deleteContact(contactId)
-            getContacts()
+            await removeContact(contactId)
         } catch (error) {
-            console.log('error:', error)
-
+            console.log(error);
         }
     }
 
     return (
         <div className="contacts-index">
-            {!selectedContact ?
-                <>
-                    <ContactFilter filterBy={filterBy} onChangeFilter={onChangeFilter} />
-                    < ContactList
-                        onRemoveContact={onRemoveContact}
-                        contacts={contacts} />
-                </> :
-                <ContactDetails contactId={selectedContact} />
-            }
+            <ContactFilter filterBy={filterBy} onChangeFilter={onChangeFilter} />
+            < ContactList
+                onRemoveContact={onRemoveContact}
+                contacts={contacts} />
         </div>
     )
 }
+
+//FILTER BY IN STORE
+//LOAD ITEMS FROM STORE
