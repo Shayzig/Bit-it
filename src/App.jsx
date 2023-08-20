@@ -11,15 +11,24 @@ import LoginSignUp from './pages/LoginSignUp'
 import { useEffect } from 'react'
 import { Route, HashRouter as Router, Routes } from 'react-router-dom'
 import { useSelector } from 'react-redux'
-import { loadUsers } from './store/actions/user.actions'
+import { loadUsers, login } from './store/actions/user.actions'
+import Footer from './cmps/Footer'
 
 
 function App() {
 
     const users = useSelector(state => state.userModule.users)
     useEffect(() => {
-        loadUsers()
+        onLogin()
     }, [])
+
+    async function onLogin() {
+        try {
+            await loadUsers()
+        } catch (error) {
+
+        }
+    }
 
     const Team = () => {
         return (
@@ -59,6 +68,7 @@ function App() {
                     <Route path='/contact/edit/:id?' element={<ContactEdit />} />
                     <Route path='/contact/:id' element={<ContactDetails />} />
                 </Routes>
+                <Footer />
             </section>
         </Router>
 

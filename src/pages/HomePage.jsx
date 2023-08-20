@@ -3,6 +3,7 @@ import User from '../cmps/User'
 import Charts from '../pages/Charts'
 import MoveList from '../cmps/MoveList'
 import { useSelector } from 'react-redux'
+import { loadLoggedInUser } from '../store/actions/user.actions'
 
 export default function HomePage() {
 
@@ -12,11 +13,14 @@ export default function HomePage() {
     }, [])
 
 
+    if (!loggedInUser) return
     return (
         <>
+        <div className="main-content">
             <User loggedInUser={loggedInUser} />
-            <Charts />
             <MoveList loggedInUser={loggedInUser} />
+        </div>
+            <Charts />
         </>
 
     )

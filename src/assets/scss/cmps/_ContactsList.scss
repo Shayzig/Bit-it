@@ -6,18 +6,18 @@
     bottom: 5%;
     right: 5%;
     height: 3rem;
-    width: 3rem;
-    background-color: $action-btn;
-    border-radius: 50%;
+    width: 6rem;
+    background-color: #7ec11a;
+    border-radius: 10em;
     border: 1px solid rgba(232, 232, 232, 0.231);
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.106);
     font-size: 1.3rem;
     color: white;
-    transition: backround-color 0.2s;
+    transition:  0.4s;
     cursor: pointer;
 
     &:hover {
-        background-color: #c13d58;
+        background-color:darken(#7ec11a, 8%);
     }
 }
 

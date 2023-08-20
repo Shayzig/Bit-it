@@ -9,7 +9,7 @@ export const SET_LOGGEDIN_USER = 'SET_LOGGEDIN_USER'
 
 const initialState = {
     loggedInUser: userService.getLoggedinUser(),
-    users: userService.getUsers(),
+    users: null,
     user: userService.getEmptyUser(),
 }
 

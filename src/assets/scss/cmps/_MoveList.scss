@@ -1,16 +1,16 @@
 .moves-container {
     display: flex;
     flex-direction: column;
-    margin-block-start: 0.5em;
     width: max-content;
     .moves-list {
-        margin-block-start: 0.5em;
         display: flex;
         flex-direction: column;
         gap: 1em;
         .move-preview {
+            border-top: 2px solid $border-neon;
+            border-bottom: 5px solid rgba(0, 0, 0, 0.184);
             display: grid;
-            grid-template-columns: 300px 250px 150px 1fr;
+            grid-template-columns: 300px 250px 1fr;
             justify-items: start;
             align-items: end;
             gap: 0.2em;
@@ -21,6 +21,7 @@
             & :first-child {
                 color: $primary-text;
             }
+
             .move-to {
                 font-size: 1.7em;
             }
@@ -46,24 +47,7 @@
                     color: rgb(113, 177, 17);
                 }
             }
-            // .amount {
-            //     font-size: 1.4em;
-            //     color: grey;
-            //     font-family: ubunto-light;
-            //     justify-self: end;
-            //     display: flex;
-            //     align-self: end;
-            //     gap: 0.4em;
-            //     .bitcoin {
-            //         color: rgb(113, 177, 17);
-            //         display: flex;
-            //         align-items: end;
-
-            //         img {
-            //             height:100%;
-            //         }
-            //     }
-            // }
+           
             .move-at {
                 color: grey;
                 font-family: ubunto-light;
@@ -78,5 +62,12 @@
         h3 {
             color: $primary-text;
         }
+    }
+}
+
+
+@media (max-width: 768px) {
+    .move-preview {
+        grid-template-columns: 20px 20px 20px;
     }
 }

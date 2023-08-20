@@ -18,10 +18,10 @@ export default function Charts() {
     const day = newTime.getDate()
     const month = newTime.getMonth() + 1
     const year = newTime.getFullYear()
-  
+
     return `${day}.${month}.${year}`
   }
-  
+
   function formatToUSD(amount) {
     const formatter = new Intl.NumberFormat('en-US', {
       style: 'currency',
@@ -65,8 +65,9 @@ export default function Charts() {
   }
 
   return (
-    <div className="charts-container">
-        {/* <h2>Exchange Trade Volume (USD)</h2> */}
+    <>
+      <div className="charts-container">
+      <h2 className='trade-title'>Exchange Trade Volume (USD)</h2>
         <ResponsiveContainer width="100%" height="100%">
           <LineChart width={800} height={600} data={formattedTradeData} margin={{ top: 0, right: 0, bottom: 0, left: 0 }}>
             <Line type="monotone" dataKey="price" stroke="#aeff5a" />
@@ -89,7 +90,7 @@ export default function Charts() {
           </LineChart>
         </ResponsiveContainer>
 
-      {/* <div className="market-container">
+        {/* <div className="market-container">
         <h2>Market</h2>
         <LineChart width={800} height={600} data={formattedMarketData} margin={{ top: 0, right: 0, bottom: 0, left: 0 }}>
           <Line type="monotone" dataKey="price" stroke="#aeff5a" />
@@ -113,6 +114,7 @@ export default function Charts() {
       </div> */}
 
 
-    </div>
+      </div >
+    </>
   )
 }

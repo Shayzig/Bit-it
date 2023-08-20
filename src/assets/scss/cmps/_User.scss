@@ -1,16 +1,17 @@
 .user-container {
     position: relative;
-    // background-color: #141a22d4;
-    // border: 8px solid #041301;
-    // outline: 1px solid $border-neon;
-    // box-shadow: 0 0 35px #8dce4c2f;
+    background-color: #141a22d4;
+    justify-self: end;
+    border: 8px solid #041301;
+    outline: 1px solid $border-neon;
+    box-shadow: 0 0 35px #8dce4c2f;
     width: max-content;
-    // margin: auto;
-    margin-block: 2em;
-    // border-radius: 10em;
-    // display: grid;
-    // grid-template-columns: 150px 1fr 150px;
-    padding-block: 2em;
+    height: 100%;
+    border-bottom-left-radius: 15em;
+    border-top-left-radius: 15em;
+    display: grid;
+    grid-template-columns: 150px 1fr 150px;
+    padding-block: 1.4em;
 
     .user {
         grid-column: 2;
@@ -59,6 +60,43 @@
             grid-column: 1;
             grid-row: 3;
             font-size: 2rem;
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    .main-content {
+        display: flex;
+        flex-direction: column;
+        .user-container {
+            grid-template-columns: 5px auto 5px;
+            .user {
+                grid-template-columns: 100px auto;
+                grid-template-rows: repeat(3, auto);
+                padding: 1em 3em;
+                .avatar {
+                    width: 80%;
+                    outline: 2px solid $shadow-btn;
+                }
+                .name {
+                    font-size: 1.4em;
+                }
+
+                .coins {
+                    font-size: 1.4rem;
+                    margin-block-start: 2em;
+                }
+                .btc {
+                    font-size: 1.4rem;
+                    margin-block-start: 2em;
+                }
+                .rate {
+                    font-size: 1.4rem;
+                }
+                .user-coins {
+                    font-size: 1.4rem;
+                }
+            }
         }
     }
 }

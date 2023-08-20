@@ -1,6 +1,13 @@
-.main-content {
-    display: flex;
-    align-items: baseline;
-    gap: 10px;
+.main-content {margin-block-start: 7em;
+    display: grid;
+    grid-template-columns: repeat(2, auto);
+    align-items: start;
+    column-gap: 0.5em;
+    margin-block-end: 5em;
+   
+    // display: flex;
+    // align-items: center;
+    // justify-content: center;
+    // gap: 10px;
 
 }

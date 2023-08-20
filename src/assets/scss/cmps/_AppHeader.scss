@@ -1,8 +1,12 @@
+.app-header-mobile {
+    display: none;
+}
 .app-header {
+    margin-block-start: 0.7em;
     color: $primary-text;
     display: flex;
     align-items: center;
-    justify-content: space-evenly;
+    justify-content: space-between;
     font-family: ubunto-medium;
     font-size: 1.2em;
     letter-spacing: 0.9px;
@@ -30,3 +34,18 @@
         }
     }
 }
+
+@media (max-width: 768px) {
+    .app-header {
+      display: none;
+    }
+    .app-header-mobile {
+        display: flex;
+        justify-content: center;
+        margin-block-start: 1em;
+        .logo {
+            height: 50px;
+        }
+    }
+}
+
