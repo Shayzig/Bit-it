@@ -7,11 +7,16 @@
     box-shadow: 0 0 35px #8dce4c2f;
     width: max-content;
     height: 100%;
-    border-bottom-left-radius: 15em;
-    border-top-left-radius: 15em;
+    border-radius: 15em;
     display: grid;
     grid-template-columns: 150px 1fr 150px;
     padding-block: 1.4em;
+
+    &.active {
+        border-radius: 0;
+        border-bottom-left-radius: 15em;
+        border-top-left-radius: 15em;
+    }
 
     .user {
         grid-column: 2;

@@ -32,7 +32,7 @@ export default function User({ loggedInUser }) {
 
     if (!loggedInUser) return
     return (
-        <section className="user-container">
+        <section className={`user-container ${loggedInUser.moves.length > 0 ? 'active' : ''}`}>
             <div className="user">
                 <img className='avatar' src={loggedInUser.img} alt="" />
                 <h2 className='name'>Hello, {loggedInUser.name}</h2>
