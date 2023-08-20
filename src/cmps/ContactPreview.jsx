@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPenToSquare } from '@fortawesome/free-solid-svg-icons'
 import { faSquareMinus } from '@fortawesome/free-solid-svg-icons'
+import logoImage from '../assets/imgs/contact.png';
 
 
 
@@ -12,13 +13,13 @@ export default function ContactPreview({ contact, onRemoveContact }) {
   return (
     <div className="contact-preview">
       <Link to={`/contact/${contact._id}`} >
-        <img className='contact-avatar' src="../../src/assets/imgs/contact.png" />
+        <img className='contact-avatar' src={logoImage} />
       </Link>
       <div className="info">
-      <Link to={`/contact/${contact._id}`} >
-        <h2 className='contact-name' >{contact.name}</h2>
-        <h2 className='contact-phone'>{contact.phone}</h2>
-      </Link>
+        <Link to={`/contact/${contact._id}`} >
+          <h2 className='contact-name' >{contact.name}</h2>
+          <h2 className='contact-phone'>{contact.phone}</h2>
+        </Link>
       </div>
       {/* <div className="details"> */}
       {/* </div> */}
