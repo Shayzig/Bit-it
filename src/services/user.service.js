@@ -24,6 +24,7 @@ async function getUsers() {
         if (!localUsers.length) {
             await signup({ name: 'Shay', coins: 10000, moves: [], img: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1160&q=80' })
             await signup({ name: 'Moshe', coins: 10000, moves: [], img: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1160&q=80' })
+            await signup({ name: 'Guest', coins: 10000, moves: [], img: 'https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_1280.png' })
             localUsers = await storageService.query('user')
         }
         return localUsers
@@ -44,7 +45,7 @@ function remove(userId) {
 
 async function login(userCred) {
     const users = await storageService.query('user')
-    const user = users.find(user => user.name === userCred.name)
+    const user = users.find(user => user.name === userCred)
     if (user) {
         return saveLocalUser(user)
     }
@@ -52,13 +53,13 @@ async function login(userCred) {
 }
 
 async function signup(userCred) {
+    const newUser = getEmptyUser()
     const users = await storageService.query('user')
-    const userCheck = users.find(user => user.name === userCred.name)
+    const userCheck = users.find(user => user.name === userCred)
     if (userCheck) return
 
-    if (!userCred.img) userCred.img = 'https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_1280.png'
+    userCred.img = 'https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_1280.png'
     const user = await storageService.post('user', userCred)
-    return saveLocalUser(user)
 }
 
 async function logout() {

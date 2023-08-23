@@ -1,12 +1,10 @@
 import React from 'react'
 import ContactPreview from '../cmps/ContactPreview'
 import { Link } from 'react-router-dom'
-import { NiceButton } from './NiceButton'
 
 
 
 export default function ContactList({ contacts, onRemoveContact }) {
-  const Icon = () => '🏆'
   if (!contacts) return
   return (
     <section className="contact-list">

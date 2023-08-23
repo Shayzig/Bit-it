@@ -50,7 +50,7 @@ export default function MoveList({ contactLastMoves, loggedInUser }) {
           ))}
         </section>
       )}
-      {loggedInUser?.moves.length > 0 && (
+      {loggedInUser?.moves?.length > 0 && (
         <>
           <section className="moves-list">
             {/* <div className="title">

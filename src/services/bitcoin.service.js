@@ -25,7 +25,6 @@ async function getBitcoinRateG() {
 async function getMarketPrice() {
     let marketData = storageService.load(MARKET_KEY) || []
     if (marketData.length > 0) {
-        console.log('from cash')
         return Promise.resolve(marketData)
     }
     const url = `https://api.blockchain.info/charts/market-price?timespan=5months&format=json&cors=true`
@@ -39,7 +38,6 @@ async function getConfirmedTransactions() {
 
     let marketTrade = storageService.load(TRADE_KEY) || []
     if (marketTrade.length > 0) {
-        console.log('from cash')
         return Promise.resolve(marketTrade)
     }
 

@@ -1,0 +1,55 @@
+.login-container {
+    @include centerFixed;
+    width: 600px;
+    .user-input {
+        @include container;
+        width: 100%;
+
+        
+        
+        &.active {
+            background-color: transparent;
+        }
+
+        .actions {
+            display: flex;
+            gap: 0.5em;
+            margin: auto;
+
+            & :first-child {
+                width: max-content;
+            }
+        }
+
+        .submit-btn {
+            @include formBtn;
+        }
+        .input-title {
+            font-family: ubunto-medium;
+            align-self: center;
+        }
+        input {
+            @include input;
+        }
+        .signup-action {
+            @include transparent-btn;
+        }
+    }
+}
+
+.user-logged {
+    @include centerFixed;
+    @include container;
+    width: 400px;
+    align-items: center;
+    gap: 1em;
+
+    .greet-user {
+        font-family: ubunto-medium;
+        font-size: 1.7rem;
+    }
+
+    .signout-btn {
+        @include transparent-btn;
+    }
+}

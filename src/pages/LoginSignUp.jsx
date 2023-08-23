@@ -6,37 +6,34 @@ import { login, logout, signup } from '../store/actions/user.actions';
 
 export default function LoginSignUp() {
     const navigate = useNavigate()
-
     const [isSignUp, setIsSignUp] = useState(false)
-    const [userToLogin, setUser] = useState(userService.getEmptyUser())
-
+    const [userName, setUserName] = useState('')
+    const [emptyUser, setEmptyUser] = useState(userService.getEmptyUser())
     const loggedInUser = useSelector(state => state.userModule.loggedInUser)
 
     useEffect(() => {
-        // setUser(loggedInUser)
     }, [loggedInUser])
 
+    console.log('login-sign-user',loggedInUser);
 
     async function onLogin(ev) {
         try {
             ev.preventDefault()
-            if (!userToLogin) return
-            login(userToLogin)
+            if (!userName) return
+            login(userName)
             setIsSignUp(false)
-            navigate('/')
-
+            // navigate('/home')
         } catch (error) {
             console.log(error);
         }
     }
-    console.log(loggedInUser);
 
     async function onSignUp(ev) {
         try {
             ev.preventDefault()
-            signup(userToLogin)
-            if (!userToLogin) return
-            navigate('/')
+            signup(emptyUser)
+            if (!emptyUser) return
+            // navigate('/home')
 
         } catch (error) {
             console.log(error);
@@ -51,61 +48,38 @@ export default function LoginSignUp() {
         const field = target.name
         let value = target.value
 
-        switch (target.type) {
-            case 'number':
-            case 'range':
-                value = (+value || '')
-                break;
-            case 'checkbox':
-                value = target.checked
-            default:
-                break;
+        if (isSignUp) {
+            setEmptyUser(prevEmptyUser => ({
+                ...prevEmptyUser,
+                [field]: value
+            }))
         }
+        setUserName(value)
 
-        setUser(prevContact => ({
-            ...prevContact,
-            [field]: value
-        }))
     }
-    
 
-    if (!userToLogin) return
-    const { name } = userToLogin
-
+    const { name } = emptyUser
     return (
-        <div className="login-page">
-            {!isSignUp && !loggedInUser &&
-                <form onSubmit={onLogin} className='login-user' >
-                    <h2>Sign in</h2>
-                    <input onChange={handleChange} value={name} type="text" name="name" id="name" placeholder='Enter full name' />
-                    <button className='save-btn'>Log in</button>
-                    <br />
-                    <br />
-                    <br />
+        <div className="login-container">
 
-                </form>
-            }
+            {loggedInUser &&
+                <div className="user-logged">
+                    <div className="greet-user"> Welcom {loggedInUser.name} ! </div>
+                    <div className="signout-btn" onClick={onLogout}>Sign Out</div>
+                </div>}
 
-            {loggedInUser && <div className="user-name"> Welcom {loggedInUser.name} !</div>}
-            <br />
-            {loggedInUser && <div className="signout" onClick={onLogout}>Sign Out</div>}
-
-
-            <br />
-
-            {!isSignUp && !loggedInUser && <h2 onClick={() => setIsSignUp(true)}>Not a member? sign up here!</h2>}
-
-
-            {isSignUp &&
-                <form onSubmit={onSignUp} className='sign-up-user' >
-                    <h2>Sign up</h2>
-                    <input onChange={handleChange} value={name} type="text" name="name" id="name" placeholder='Enter full name' />
-                    <button className='save-btn'>Sign Up</button>
+            {!loggedInUser &&
+                <form onSubmit={isSignUp ? onSignUp : onLogin} className={`user-input ${isSignUp ? "active" : ''}`} >
+                    <h2 className='input-title'>{isSignUp ? 'Sign Up for free' : 'Sign in'}</h2>
+                    <input onChange={handleChange} value={!isSignUp ? userName : name} type="text" name="name" id="name" placeholder='Enter guest' />
+                    <div className="actions">
+                        <button className='submit-btn' onClick={() => login(setUserName('Guest'))}>Guest mode</button>
+                        <button className='submit-btn'>{isSignUp ? 'Sign up' : 'Login'}</button>
+                    </div>
+                    <div className="signup-action" onClick={() => setIsSignUp(!isSignUp)}>
+                        {!isSignUp ? 'Not a member? sign up here!' : 'Back to Login'}</div>
                 </form>}
-            <br />
-            <br />
-            {isSignUp && <h2 onClick={() => setIsSignUp(false)}>Return sign in</h2>}
-        </div>
+        </div >
 
     )
 }

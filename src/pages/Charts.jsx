@@ -57,7 +57,6 @@ export default function Charts() {
   async function getConfirmedTransactions() {
     try {
       const res = await bitcoinService.getConfirmedTransactions()
-      console.log(res)
       setTradeVol(res)
     } catch (error) {
       console.log(error)

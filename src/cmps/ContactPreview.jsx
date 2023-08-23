@@ -5,10 +5,6 @@ import { faPenToSquare } from '@fortawesome/free-solid-svg-icons'
 import { faSquareMinus } from '@fortawesome/free-solid-svg-icons'
 import logoImage from '../assets/imgs/contact.png';
 
-
-
-
-
 export default function ContactPreview({ contact, onRemoveContact }) {
   return (
     <div className="contact-preview">

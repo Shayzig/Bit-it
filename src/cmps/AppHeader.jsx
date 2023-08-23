@@ -6,18 +6,15 @@ export default function AppHeader() {
     return (
         <>
             <div className="app-header">
-                <NavLink to="/">Home</NavLink>
-                <NavLink to="/login">Login</NavLink>
-                {/* <NavLink to="/about">About</NavLink> */}
-                <div className="logo-bg">
-                    <NavLink to="/"><img className='logo' src={logoImage} alt="" /></NavLink>
-                </div>
+                <NavLink to="/home">Home</NavLink>
+                <NavLink to="/">Login</NavLink>
+                <div className="logo-bg"> <NavLink to="/home"><img className='logo' src={logoImage} alt="" /></NavLink></div>
                 <NavLink to="/contact">Contacts</NavLink>
-                <NavLink to="/chart">Charts</NavLink>
-            </div>
-            <div className="app-header-mobile">
-                <NavLink to="/"><img className='logo' src="src/assets/imgs/bit.png" alt="" /></NavLink>
+                <NavLink to="/chart">Stats</NavLink>
             </div>
         </>
     )
 }
+
+
+{/* <NavLink to="/about">About</NavLink> */ }

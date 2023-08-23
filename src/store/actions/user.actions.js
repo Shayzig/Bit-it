@@ -10,7 +10,6 @@ export async function loadUsers() {
             users: users
         }
         store.dispatch(actionSet)
-        login(users[1])
     } catch (error) {
         console.log('error:', error)
     }
@@ -55,13 +54,12 @@ export async function logout() {
     }
 }
 
-export async function login(user) {
+export async function login(userName) {
     try {
-        console.log('user', user);
-        const loggedUser = await userService.login(user)
+        const user = await userService.login(userName)
         const action = {
             type: SET_LOGGEDIN_USER,
-            loggedUser: loggedUser
+            loggedUser: user
         }
         store.dispatch(action)
     } catch (error) {
@@ -69,10 +67,9 @@ export async function login(user) {
     }
 }
 
-export async function signup(user) {
+export async function signup(userCred) {
     try {
-        const loggedUser = await userService.signup(user)
-        console.log(SET_LOGGEDIN_USER);
+        const loggedUser = await userService.signup(userCred)
         const action = {
             type: SET_LOGGEDIN_USER,
             loggedUser: loggedUser
@@ -90,6 +87,7 @@ export async function updateUser(user) {
             type: UPDATE_USER,
             updatedUser: updatedUser
         }
+        login(updatedUser.name)
         store.dispatch(action)
     } catch (error) {
         console.log('error:', error)

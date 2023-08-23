@@ -19,7 +19,9 @@ export default function ContactDetails() {
 
     useEffect(() => {
         loadContact(params.id)
-    }, [])
+    }, [loggedInUser])
+
+    console.log('details-user', loggedInUser);
 
     function handleChange({ target }) {
         const field = target.name
@@ -39,16 +41,17 @@ export default function ContactDetails() {
     }
 
     function onTransferFound() {
-        if (loggedInUser.coins < coinsAmount) return
+        // if (loggedInUser.coins < coinsAmount) return
         const move = { to: contact.name, at: new Date().toLocaleString(), amount: coinsAmount };
         const updatedUser = {
             ...loggedInUser,
             coins: loggedInUser.coins - coinsAmount,
             moves: [...loggedInUser.moves, move]
         };
+        // console.log(updatedUser);
         updateUser(updatedUser)
-        login(updatedUser)
     }
+
 
     if (!loggedInUser) return
     const contactLastMoves = loggedInUser.moves.filter(move => move.to === contact.name)

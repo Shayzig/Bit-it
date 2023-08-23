@@ -10,17 +10,16 @@ export default function HomePage() {
     const loggedInUser = useSelector(state => state.userModule.loggedInUser)
 
     useEffect(() => {
-    }, [])
+    }, [loggedInUser])
+    console.log('home-user', loggedInUser);
 
-
-    if (!loggedInUser) return
     return (
         <>
-        <div className="main-content">
-            <User loggedInUser={loggedInUser} />
-            <MoveList loggedInUser={loggedInUser} />
-        </div>
-            <Charts />
+            <div className="main-content">
+                <User loggedInUser={loggedInUser} />
+                <MoveList loggedInUser={loggedInUser} />
+            </div>
+            {/* <Charts /> */}
         </>
 
     )
