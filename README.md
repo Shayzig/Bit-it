@@ -13,7 +13,7 @@ Simplified Financial Insights
 Transaction Details Page: Clear view of specifics, status, and actions. Attach notes and files for better management.
 
 Discover Bit-It
-Explore capabilities at https://bit-it-app.onrender.com/. Manage virtual currencies securely—all in one platform.
+Explore capabilities at https://shayzig.github.io/Bit-it/. Manage virtual currencies securely—all in one platform.
 
 # React + Vite
 # Bit-it
